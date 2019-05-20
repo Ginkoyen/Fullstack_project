@@ -1,0 +1,14 @@
+{
+  "name": "fullstack_project",
+  "version": "1.0.0",
+  "description": "Parse a train ticket to convert into a JSON format file",
+  "main": "server.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "author": "Pierre LE DU",
+  "license": "GPLv3",
+  "dependencies": {
+    "jsdom": "15.1.0"
+  }
+}

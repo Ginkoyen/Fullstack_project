@@ -1,0 +1,119 @@
+{
+  "trips": {
+    "_query": "ARRAY",
+    "_selectors": "#main-column",
+
+    "_content": {
+      "code": {
+        "_selectors": "#block-travel table.block-pnr .pnr-ref .pnr-info",
+        "_index": -1
+      },
+      "name": {
+        "_selectors": "#block-travel table.block-pnr .pnr-name .pnr-info",
+        "_index": -1
+      },
+      "details": {
+        "_query": "OBJECT",
+
+        "_content": {
+          "price": {
+            "_selectors": "#block-payment .very-important",
+            "_type": "number"
+          },
+          "roundTrips": {
+            "_query": "ARRAY",
+            "_selectors": "#block-command .digital-box-cell .product-details",
+
+            "_content": {
+              "type": {
+                "_selectors": ".travel-way"
+              },
+              "date": {
+                "_parent_selectors": ".product-travel-date",
+                "_parentNode": 1,
+                "_current": true,
+
+                "_type": "date"
+              },
+              "trains": {
+                "_query": "ARRAY",
+                "_selectors": "tbody",
+
+                "_content": {
+                  "departureTime": {
+                    "_selectors": ".origin-destination-hour.segment-departure",
+                    "_actions": [
+                      { "_type": "replace", "_params": [ "h", ":" ] }
+                    ]
+                  },
+                  "departureStation": {
+                    "_selectors": ".origin-destination-station.segment-departure"
+                  },
+                  "arrivalTime": {
+                    "_selectors": ".origin-destination-hour.segment-arrival",
+                    "_actions": [
+                      { "_type": "replace", "_params": [ "h", ":" ] }
+                    ]
+                  },
+                  "arrivalStation": {
+                    "_selectors": ".origin-destination-station.segment-arrival"
+                  },
+                  "type": {
+                    "_selectors": ".segment"
+                  },
+                  "number": {
+                    "_selectors": ".segment",
+                    "_index":1
+                  },
+                  "passengers": {
+                    "_parent_selectors": ".passengers",
+                    "_parentNode": 2,
+                    "_current": true,
+
+                    "_query": "ARRAY",
+                    "_selectors": "tr",
+
+                    "_content": {
+                      "type": {
+                        "_selectors": ".fare-details",
+                        "_actions": [
+                          { "_type": "search", "_params": [ "échangeable", "échangeable", "non échangeable" ] }
+                        ]
+                      },
+                      "age": {
+                        "_selectors": ".typology",
+                        "_actions": [
+                          { "_type": "split", "_params": [ "(", 1 ] },
+                          { "_type": "concat", "_params": [ "(", "first"  ] }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "custom": {
+    "_query": "OBJECT",
+    "_selectors": "#block-command .digital-box-cell",
+
+    "_content": {
+      "prices": {
+        "_query": "ARRAY",
+        "_selectors": ".product-header",
+
+        "_content": {
+          "value": {
+            "_selectors": ".cell, .amount",
+            "_type": "number",
+            "_index": 1
+          }
+        }
+      }
+    }
+  }
+}
