@@ -29,7 +29,8 @@ const fs = require(`fs`)
 */
 const pattern_path = `./patterns/ouisncf_pattern.json`
 const ticket_path =  `./tickets/test.html`
-const result_path =  `./results/result.json`
+const result_path =  `./results`
+const result_name =  `result.json`
 
 
 // Match current date with a date in the text, year does not compared
@@ -106,11 +107,15 @@ fs.readFile(pattern_path, (err, data) => {
         status: (complete) ? `ok` : `no completed`
       }, null, '\t')
 
-      // Create result json file, write result
-      fs.writeFile(result_path, data, (err) => {
+      // Create result folder if does not exist
+      fs.mkdir(result_path, (err) => {
         if (err) throw err
+        // Create result json file, write result
+        fs.writeFile(`${result_path}/${result_name}`, data, (err) => {
+          if (err) throw err
 
-        console.log(`The file has been saved!`)
+          console.log(`The file has been saved!`)
+        })
       })
     })
   })
