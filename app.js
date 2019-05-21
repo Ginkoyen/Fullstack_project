@@ -109,7 +109,6 @@ fs.readFile(pattern_path, (err, data) => {
 
       // Create result folder if does not exist
       fs.mkdir(result_path, (err) => {
-        if (err) throw err
         // Create result json file, write result
         fs.writeFile(`${result_path}/${result_name}`, data, (err) => {
           if (err) throw err
