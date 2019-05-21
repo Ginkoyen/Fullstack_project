@@ -6,4 +6,4 @@ This project has been developed with Node.js v8.9.3
 In order to start the project, please follow the steps below:
 1. In your console, go to the project directory
 2. Enter the command `npm  install`
-3. Enrer the command `npm test` or `node app`
+3. Enter the command `npm test` or `node app`
